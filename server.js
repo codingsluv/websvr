@@ -1,15 +1,13 @@
-const http = require('http');
+const Hapi = require('@hapi/hapi');
 
-const requestListener = (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.writeHead(200);
-    res.end(JSON.stringify({ message: 'Hello, World!' }));
-}
+const init = async () => {
+  const server = Hapi.server({
+    port: 8080,
+    host: 'localhost',
+  });
 
-const server = http.createServer(requestListener)
-const port = 8080
-const host = 'localhost'
+  await server.start();
+  console.log('Server running on %s', server.info.uri);
+};
 
-server.listen(port, host, () => {
-    console.log(`Server running at http://${host}:${port}/`)
-})
+init();
