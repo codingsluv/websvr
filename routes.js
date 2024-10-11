@@ -11,6 +11,10 @@ const routes = [
         path: '/users/{username?}',
         handler: (request, h) => {
             const { username = 'orang-asing'} = request.params
+            const { lang } = request.query
+            if (lang === 'id'){
+                return `Halo ${username}, selamat datang di website kami!`;
+            }
             return `Hello ${username}`;
         },
     },
